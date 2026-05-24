@@ -1,0 +1,38 @@
+:root {
+  --vp-c-brand-1: #7c3aed;
+  --vp-c-brand-2: #8b5cf6;
+  --vp-c-brand-3: #a78bfa;
+  --vp-c-brand-soft: #ede9fe;
+}
+
+.VPButton.medium {
+  background-color: #7c3aed;
+  border-color: #7c3aed;
+}
+
+.VPButton.medium:hover {
+  background-color: #6d28d9;
+  border-color: #6d28d9;
+}
+
+.VPNavBarTitle .title {
+  font-weight: 600;
+  color: #7c3aed;
+}
+
+.VPSidebarItem.level-1 .text {
+  font-weight: 600;
+}
+
+:root {
+  --vp-code-font-size: 14px;
+  --vp-code-line-height: 1.6;
+}
+
+.vp-doc li + li {
+  margin-top: 4px;
+}
+
+.VPDoc .container {
+  max-width: 1280px;
+}
