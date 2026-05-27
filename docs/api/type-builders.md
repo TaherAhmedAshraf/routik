@@ -39,21 +39,27 @@ Build validation schemas with the Type Builder API.
 | `Literal(value)` | Exact match (string, number, or boolean) |
 | `Union([...])` | Accepts any of the listed types |
 
-### Union Example
+### Union Examples
 
+String literals (like `Enum`):
 ```typescript
-import { Union, Literal } from 'routik';
-
-createSchema({
-  status: Union([
-    Literal('active'),
-    Literal('inactive'),
-    Literal('pending')
-  ])
-});
-// Valid: 'active', 'inactive', 'pending'
-// Invalid: anything else
+Union([Literal('a'), Literal('b'), Literal('c')])
 ```
+
+Mixed types:
+```typescript
+Union([String(), Number()])
+```
+
+Discriminated object union:
+```typescript
+Union([
+  Obj({ kind: Literal('circle'), radius: Number() }),
+  Obj({ kind: Literal('square'), side: Number() })
+])
+```
+
+See the [Unions guide](../guide/schema-unions) for detailed patterns.
 
 ## Complex Types
 

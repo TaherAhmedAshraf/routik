@@ -1,4 +1,4 @@
-import { z, ZodType, ZodObject } from 'zod';
+import { ZodType, ZodObject } from 'zod';
 import { RequestHandler } from 'express';
 
 export interface RouteMeta {
@@ -41,21 +41,15 @@ export interface SecurityScheme {
   flows?: Record<string, any>;
 }
 
-export type ShorthandValue = string;
-
-export type ShorthandObject = {
-  [key: string]: ShorthandValue | ShorthandObject | ShorthandObject[];
-};
-
 export interface TypeWrapper {
   _zodMeta: ZodObject<any>;
   _typeInfo?: any;
 }
 
 export interface RouteSchema {
-  params?: ZodType<any> | ShorthandObject | TypeWrapper;
-  query?: ZodType<any> | ShorthandObject | TypeWrapper;
-  body?: ZodType<any> | ShorthandObject | TypeWrapper;
+  params?: ZodType<any> | TypeWrapper;
+  query?: ZodType<any> | TypeWrapper;
+  body?: ZodType<any> | TypeWrapper;
   meta?: RouteMeta;
   before?: RequestHandler[];
   after?: RequestHandler[];
@@ -87,13 +81,6 @@ export function isRouteSchema(arg: any): arg is RouteSchema {
   const validKeys = ['params', 'query', 'body', 'meta', 'before', 'after'];
   return keys.some(k => validKeys.includes(k)) &&
          keys.every(k => validKeys.includes(k));
-}
-
-export function isShorthandObject(obj: any): obj is ShorthandObject {
-  if (!obj || typeof obj !== 'object') return false;
-  return Object.values(obj).some(v =>
-    typeof v === 'string' || isShorthandObject(v) || (Array.isArray(v) && v.every(i => isShorthandObject(i)))
-  );
 }
 
 export function isTypeWrapper(arg: any): arg is TypeWrapper {

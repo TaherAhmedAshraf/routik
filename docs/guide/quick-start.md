@@ -82,21 +82,6 @@ Visit:
 - `http://localhost:3000/docs` - Swagger UI with your API documentation
 - `http://localhost:3000/users` - Your actual API endpoint
 
-## Using Shorthand Syntax
-
-For simple schemas, use string shorthand:
-
-```typescript
-router.post('/users', {
-  body: {
-    name: 'string.min(1)',
-    email: 'string.email',
-    age: 'number?'
-  },
-  meta: { summary: 'Create user' }
-}, handler);
-```
-
 ## Using Zod Directly
 
 You can also use raw Zod schemas:

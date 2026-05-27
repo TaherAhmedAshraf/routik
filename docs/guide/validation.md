@@ -6,7 +6,7 @@ Request data is validated automatically based on your schema definitions.
 
 ```typescript
 router.post('/users', {
-  body: { name: 'string.min(1)', email: 'string.email' }
+  body: { name: String(1, 100), email: Email() }
 }, (req, res) => {
   // req.body is ALREADY validated when this runs
   res.json({ id: '1', ...req.body });
@@ -15,7 +15,7 @@ router.post('/users', {
 
 If validation fails, the handler is NOT called. A 400 error is passed to Express `next()`.
 
-## Three Ways to Define Schemas
+## Two Ways to Define Schemas
 
 ### 1. Type Builder API (Recommended)
 
@@ -31,19 +31,7 @@ router.post('/users', {
 }, handler);
 ```
 
-### 2. Shorthand Strings
-
-```typescript
-router.post('/users', {
-  body: {
-    name: 'string.min(1)',
-    email: 'string.email',
-    age: 'number?'
-  }
-}, handler);
-```
-
-### 3. Raw Zod
+### 2. Raw Zod
 
 ```typescript
 import { z } from 'zod';

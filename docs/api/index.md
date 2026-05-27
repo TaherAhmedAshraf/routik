@@ -92,13 +92,7 @@ import { createSchema, String, Email, Optional, Number } from 'routik';
 createSchema({ name: String(), email: Email(), age: Optional(Number()) })
 ```
 
-### 2. Shorthand Strings
-
-```typescript
-body: { name: 'string.min(1)', email: 'string.email', age: 'number?' }
-```
-
-### 3. Raw Zod
+### 2. Raw Zod
 
 ```typescript
 import { z } from 'zod';

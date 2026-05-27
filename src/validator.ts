@@ -1,8 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { ZodType, ZodError, ZodObject } from 'zod';
-import { RouteSchema, NormalizedRouteSchema, isShorthandObject, isTypeWrapper } from './types';
-import { maybeParseShorthand } from './shorthand';
-import { maybeParseType } from './infer';
+import { RouteSchema, NormalizedRouteSchema, isTypeWrapper } from './types';
+import { createSchema, maybeParseType } from './infer';
 
 interface ValidationTarget {
   schema: ZodType<any>;
@@ -32,21 +31,15 @@ function formatZodError(error: ZodError): ValidationError {
 function normalizeToZod(value: any): ZodType<any> | undefined {
   if (!value) return undefined;
 
-  if (value instanceof ZodType) {
-    return value as ZodType<any>;
-  }
-
-  if (isShorthandObject(value)) {
-    return maybeParseShorthand(value) as ZodType<any>;
-  }
-
-  if (isTypeWrapper(value)) {
-    return value._zodMeta as ZodType<any>;
-  }
-
   const typeResult = maybeParseType(value);
   if (typeResult) {
     return typeResult;
+  }
+
+  if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
+    try {
+      return createSchema(value);
+    } catch {}
   }
 
   return undefined;

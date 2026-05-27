@@ -38,18 +38,10 @@ export {
   SecurityScheme,
   SecurityRequirement,
   ServerConfig,
-  ShorthandObject,
   TypeWrapper,
   isRouteSchema,
-  isShorthandObject,
   isTypeWrapper,
 } from "./types";
-export {
-  parseShorthand,
-  parseShorthandObject,
-  maybeParseShorthand,
-  isShorthandObject as isShorthandValue,
-} from "./shorthand";
 export {
   Type,
   createSchema,

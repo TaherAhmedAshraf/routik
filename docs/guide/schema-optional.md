@@ -9,12 +9,6 @@ Optional(String())      // string or undefined
 Optional(Number(), 0)    // with default value
 ```
 
-With shorthand:
-```typescript
-{ name: 'string' }      // required
-{ name: 'string?' }      // optional
-```
-
 ## Enum
 
 Pick from a list:
@@ -35,10 +29,6 @@ Literal(true)       // only true
 
 ## Union
 
-Multiple options:
+Combine multiple types into one. See the [Unions guide](./schema-unions) for detailed usage.
 
-```typescript
-Union([Literal('a'), Literal('b')])
-```
-
-Next: [Objects & Arrays](./schema-objects)
+Next: [Unions](./schema-unions)
