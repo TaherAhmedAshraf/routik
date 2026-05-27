@@ -25,7 +25,7 @@ const router = createRouter({
 | Field | Type | Description |
 |-------|------|-------------|
 | `info` | `{ title?, version?, description? }` | OpenAPI info |
-| `servers` | `ServerConfig[]` | OpenAPI servers |
+| `servers` | `ServerConfig[]` | OpenAPI servers (defaults to `[{ url: '/' }]`) |
 | `securitySchemes` | `SecurityScheme[]` | Auth schemes for Swagger UI |
 
 ### SecurityScheme
@@ -53,6 +53,12 @@ The schema argument is optional. If omitted, all arguments after the path are tr
 router.get('/health', (req, res) => res.json({ ok: true }));
 ```
 
+You can also pass an array of handlers directly instead of a schema:
+
+```typescript
+router.get('/health', [middleware1, middleware2], (req, res) => res.json({ ok: true }));
+```
+
 ## Schema Object
 
 ```typescript
@@ -64,10 +70,10 @@ router.get('/health', (req, res) => res.json({ ok: true }));
     summary: string,           // Shown in Swagger UI
     tags: string[],            // Group endpoints
     security?: [{ bearerAuth: [] }],  // Override per-route
-    responses: {
+    responses?: {
       '200': { description: 'OK', schema?: ZodType },
       '404': { description: 'Not found' }
-    }
+    }  // If omitted, a default 200 response is auto-generated
   },
   before: [middleware],   // Runs BEFORE validation (auth, rate limit)
   after: [middleware]     // Runs AFTER validation, BEFORE handler (logging)
@@ -157,7 +163,9 @@ router.post('/users', {
 Validation errors are passed to Express `next()` with status 400:
 
 ```typescript
-app.use((err, req, res, next) => {
+import type { ValidationError } from 'routik';
+
+app.use((err: ValidationError, req, res, next) => {
   if (err.status === 400) {
     return res.status(400).json({
       error: err.message,             // "Validation failed"
@@ -205,5 +213,5 @@ Global → Before → Validation → After → Handler
 The package includes full TypeScript declarations. Import types:
 
 ```typescript
-import type { RouterConfig, RouteSchema, RegisteredRoute, HttpMethod } from 'routik';
+import type { RouterConfig, RouteSchema, RegisteredRoute, HttpMethod, ValidationError } from 'routik';
 ```

@@ -38,7 +38,9 @@ export class ZodRouter {
     let schema: RouteSchema | undefined;
     let routeHandlers: RequestHandler[];
 
-    if (isRouteSchema(schemaOrHandler)) {
+    if (Array.isArray(schemaOrHandler)) {
+      routeHandlers = [...schemaOrHandler, ...handlers];
+    } else if (isRouteSchema(schemaOrHandler)) {
       schema = schemaOrHandler;
       routeHandlers = handlers;
     } else {

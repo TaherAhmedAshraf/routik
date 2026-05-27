@@ -2,14 +2,25 @@
 
 Your API documentation is generated automatically from route definitions.
 
+## Server URL
+
+By default, Swagger UI sends requests to `/` (relative to the docs page). You can configure one or more servers:
+
+```typescript
+const router = createRouter({
+  servers: [{ url: 'http://localhost:3000', description: 'Development' }]
+});
+```
+
+If no servers are configured, `[{ url: '/' }]` is used automatically.
+
 ## Mount Swagger UI
 
 ```typescript
 import { createRouter } from 'routik';
 
 const router = createRouter({
-  info: { title: 'My API', version: '1.0.0' },
-  servers: [{ url: 'http://localhost:3000', description: 'Development' }]
+  info: { title: 'My API', version: '1.0.0' }
 });
 
 // After mounting routes, mount docs
@@ -38,6 +49,8 @@ router.post('/users', {
   }
 }, handler);
 ```
+
+If `meta.responses` is omitted, a default `200 { description: 'OK' }` response is generated automatically so Swagger always shows a response entry.
 
 ## Security Schemes
 

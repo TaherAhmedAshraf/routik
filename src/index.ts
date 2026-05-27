@@ -27,7 +27,7 @@
  */
 
 export { ZodRouter, createRouter } from "./router";
-export { createValidatorMiddleware, normalizeSchema } from "./validator";
+export { createValidatorMiddleware, normalizeSchema, ValidationError } from "./validator";
 export { OpenApiBuilder } from "./openapi";
 export {
   RouterConfig,

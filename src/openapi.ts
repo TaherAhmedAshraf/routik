@@ -153,9 +153,11 @@ export class OpenApiBuilder {
         paths[openApiPath] = {};
       }
 
-      const operation: JsonSchema = {
-        responses: this.buildResponses(routeMeta.responses),
-      };
+      const responses = this.buildResponses(routeMeta.responses);
+      if (Object.keys(responses).length === 0) {
+        responses['200'] = { description: 'OK' };
+      }
+      const operation: JsonSchema = { responses };
 
       if (routeMeta.summary) {
         operation.summary = routeMeta.summary;
@@ -224,9 +226,9 @@ export class OpenApiBuilder {
       paths,
     };
 
-    if (this.config.servers?.length) {
-      spec.servers = this.config.servers;
-    }
+    spec.servers = this.config.servers?.length
+      ? this.config.servers
+      : [{ url: '/' }];
 
     if (Object.keys(securitySchemes).length > 0) {
       spec.components = { securitySchemes };

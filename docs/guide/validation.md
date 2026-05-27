@@ -90,9 +90,11 @@ Invalid requests return a 400 error:
 Add middleware after your routes to handle validation errors:
 
 ```typescript
+import type { ValidationError } from 'routik';
+
 app.use(router.getRouter());
 
-app.use((err, req, res, next) => {
+app.use((err: ValidationError, req, res, next) => {
   if (err.status === 400) {
     return res.status(400).json({
       error: err.message,
