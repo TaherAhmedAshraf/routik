@@ -1,5 +1,7 @@
 # routik
 
+> **⚠️ Beta Notice:** routik is currently in **beta** (`1.0.0-beta.1`). It is not yet production-ready and no guarantees are made about API stability or behavior. Use at your own risk.
+
 Express router wrapper with built-in Zod validation and automatic OpenAPI 3.x documentation generation.
 
 ## Features
