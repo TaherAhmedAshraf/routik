@@ -2,7 +2,7 @@
 
 Full-featured backend demonstrating auth, RBAC, pagination, sub-routers, before/after hooks, and auto-generated OpenAPI docs with security schemes.
 
-This example is in the [`example/`](https://github.com/example/routik/tree/main/example) directory.
+This example is in the [`example/`](https://github.com/TaherAhmedAshraf/routik/tree/main/example) directory.
 
 ## Features Demonstrated
 

@@ -7,9 +7,11 @@ export default defineConfig({
   srcDir: ".",
   head: [
     ["link", { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" }],
+    ["meta", { property: "og:image", content: "/banner.png" }],
+    ["meta", { property: "twitter:image", content: "/banner.png" }],
   ],
   themeConfig: {
-    logo: "/logo.svg",
+    logo: "/logo.png",
     siteTitle: "routik",
     nav: [
       { text: "Guide", link: "/guide/getting-started" },
@@ -66,7 +68,7 @@ export default defineConfig({
       ],
     },
     socialLinks: [
-      { icon: "github", link: "https://github.com/example/routik" },
+      { icon: "github", link: "https://github.com/TaherAhmedAshraf/routik" },
       { icon: "npm", link: "https://www.npmjs.com/package/routik" },
     ],
     search: {
@@ -74,7 +76,7 @@ export default defineConfig({
     },
     footer: {
       message: "Released under the MIT License.",
-      copyright: "Copyright © 2024-present",
+      copyright: "Copyright © 2026",
     },
   },
   markdown: {
