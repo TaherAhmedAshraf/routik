@@ -1,9 +1,13 @@
 {
   "name": "routik",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "Schema-first API router for Express with automatic validation and OpenAPI docs",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "repository": {
+    "url": "https://github.com/TaherAhmedAshraf/routik"
+  },
+  "homepage": "https://routik.taher.one/",
   "files": [
     "dist/"
   ],

@@ -21,6 +21,8 @@ Express router wrapper with built-in Zod validation and automatic OpenAPI 3.x do
 npm install routik
 ```
 
+For indept documentation visit: https://routik.taher.one/
+
 ## Quick Start
 
 ```typescript
@@ -115,36 +117,6 @@ createSchema({
   type: Literal(1)
 })
 ```
-
-### Shorthand Strings
-
-For simple cases, use string shorthand:
-
-```typescript
-// body: { name: string, email: string }
-body: { name: 'string', email: 'string.email' }
-
-// Optional fields with ?
-body: { name: 'string?', email: 'string.email' }
-
-// With constraints
-body: {
-  name: 'string.min(1)',
-  age: 'number.min(0).max(150)',
-  uuid: 'string.uuid'
-}
-
-// Arrays
-body: { tags: 'string[]' }
-```
-
-**Shorthand Constraints:**
-- `string.min(n)`, `string.max(n)`, `string.length(n)`
-- `string.email`, `string.url`, `string.uuid`, `string.cuid`
-- `string.regex(/pattern/)`
-- `number.min(n)`, `number.max(n)`, `number.positive()`, `number.int()`
-- `string?` (optional), `string!` (nullable)
-- `string.default("value")`
 
 ### Raw Zod
 
